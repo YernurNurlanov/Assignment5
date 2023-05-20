@@ -9,6 +9,27 @@ public class BST<K extends Comparable<K>, V> {
             this.key = key;
             this.val = val;
         }
+        @Override
+        public String toString() {
+            return "Node{" + "key=" + key + ", val=" + val + '}';
+        }
     }
+    public void put(K key, V val) {
+        root = put(root, key, val);
+    }
+    public Node put(Node node, K key, V val){
+        if (node == null) {
+            size++;
+            return new Node(key, val);
+        }
+        int x = key.compareTo(node.key);
+        if (x < 0)
+            node.left = put(node.left, key, val);
+        else if (x > 0)
+            node.right = put(node.right, key, val);
+        else
+            node.val = val;
 
+        return node;
+    }
 }
