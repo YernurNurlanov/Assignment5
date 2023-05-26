@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-
 public class BST<K extends Comparable<K>, V> {
     private Node root;
     private int size = 0;
@@ -98,5 +97,19 @@ public class BST<K extends Comparable<K>, V> {
         inOrderTraversal(node.left, keys);
         keys.add(node.key);
         inOrderTraversal(node.right, keys);
+    }
+    public boolean contains(V val) {
+        return contains(root, val);
+    }
+    private boolean contains(Node node, V val) {
+        if (node == null)
+            return false;
+        int x = ((Comparable<V>) val).compareTo(node.val);
+        if (x < 0)
+            return contains(node.left, val);
+        else if (x > 0)
+            return contains(node.right, val);
+        else
+            return true;
     }
 }
